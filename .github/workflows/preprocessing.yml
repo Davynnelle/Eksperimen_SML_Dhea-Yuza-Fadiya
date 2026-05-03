@@ -55,5 +55,5 @@ jobs:
           git add preprocessing/wildfire_preprocessing/
           git diff --staged --quiet && echo "No changes to commit" && exit 0
           git commit -m "chore: auto-update preprocessed dataset [skip ci]"
-          git push --force-with-lease origin main
+          git push --force origin main
           echo "✔ Preprocessing selesai dan data berhasil di-commit."
