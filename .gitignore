@@ -1,8 +1,6 @@
 wildfire_data/*.csv
 wildfire_data/*.zip
 
-preprocessing/wildfire_preprocessing/train.csv
-
 __pycache__/
 *.pyc
 .venv/
