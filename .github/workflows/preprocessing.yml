@@ -55,7 +55,15 @@ jobs:
                 --output_dir preprocessing/wildfire_preprocessing
 
       - name: Commit preprocessed data
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "chore: auto-update preprocessed dataset [skip ci]"
-          file_pattern: "preprocessing/wildfire_preprocessing/*"
+        run: |
+              git config --local user.name  "github-actions[bot]"
+              git config --local user.email "github-actions[bot]@users.noreply.github.com"
+              cp -r preprocessing/wildfire_preprocessing/ /tmp/wf_output/
+              git fetch origin main
+              git reset --hard origin/main
+              cp -r /tmp/wf_output/. preprocessing/wildfire_preprocessing/
+              git add preprocessing/wildfire_preprocessing/
+              git diff --staged --quiet && echo "No changes to commit" && exit 0
+              git commit -m "chore: auto-update preprocessed dataset [skip ci]"
+              git push origin main
+              echo "✔ Selesai."
