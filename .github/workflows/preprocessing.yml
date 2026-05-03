@@ -50,9 +50,8 @@ jobs:
 
       - name: Commit preprocessed data
         run: |
-          git config --local user.name  "github-actions[bot]"
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
           git add preprocessing/wildfire_preprocessing/
-          git commit -m "chore: auto-update preprocessed dataset [skip ci]"
-          git push --force origin main
-          echo "✔ Preprocessing selesai dan data berhasil di-commit."
+          git commit -m "Update preprocessed data: $(date)" || echo "No changes to commit"
+          git push origin main
