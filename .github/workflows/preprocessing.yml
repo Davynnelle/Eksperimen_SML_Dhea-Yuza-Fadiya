@@ -33,16 +33,16 @@ jobs:
           KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
         run: |
           pip install kaggle
-          mkdir -p wildfire_data_raw
+          mkdir -p wildfire_data
           kaggle datasets download \
             -d sarcasmos/nasa-firms-multi-sensor-global-wildfire-detections \
-            -p wildfire_data_raw \
+            -p wildfire_data \
             --unzip
 
       - name: Run preprocessing pipeline
         run: |
           python preprocessing/automate_Dhea-Yuza-Fadiya.py \
-            --input_dir wildfire_data_raw \
+            --input_dir wildfire_data \
             --output_dir preprocessing/wildfire_preprocessing
 
       - name: Commit preprocessed data
