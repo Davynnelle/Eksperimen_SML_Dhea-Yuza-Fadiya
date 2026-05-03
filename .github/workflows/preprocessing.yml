@@ -50,18 +50,12 @@ jobs:
 
       - name: Run preprocessing pipeline
         run: |
-          python preprocessing/automate_Dhea-Yuza-Fadiya.py \
-            --input_dir wildfire_data \
-            --output_dir preprocessing/wildfire_preprocessing
+              python preprocessing/automate_Dhea-Yuza-Fadiya.py \
+                --input_dir wildfire_data \
+                --output_dir preprocessing/wildfire_preprocessing
 
       - name: Commit preprocessed data
-        run: |
-          git config --local user.name  "github-actions[bot]"
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git fetch origin main
-          git reset --soft origin/main
-          git add preprocessing/wildfire_preprocessing/
-          git diff --staged --quiet && echo "No changes to commit" && exit 0
-          git commit -m "chore: auto-update preprocessed dataset [skip ci]"
-          git push origin HEAD:main
-          echo "✔ Selesai."
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: auto-update preprocessed dataset [skip ci]"
+          file_pattern: "preprocessing/wildfire_preprocessing/*"
