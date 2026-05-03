@@ -1,5 +1,5 @@
-wildfire_data/*.csv
-wildfire_data/*.zip
+wildfire_data_raw/*.csv
+wildfire_data_raw/*.zip
 
 preprocessing/wildfire_preprocessing/train.csv
 
